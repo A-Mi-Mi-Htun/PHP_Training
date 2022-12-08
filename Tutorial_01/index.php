@@ -11,8 +11,6 @@
   <table class="table">
   <?php
     echo "<h1>Chessboard</h1>";
-    
-    $value = 0;
     $col = 0;
 
     while($col < 8)
