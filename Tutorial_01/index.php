@@ -6,7 +6,7 @@
 <body>
     <table class="table">
     <?php
-        echo "<h1>Chessboard</h1>";
+        echo "<h1 class='title'>Chessboard</h1>";
         $col = 0;
         
         while ($col < 8) {

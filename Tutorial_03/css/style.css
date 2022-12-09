@@ -1,0 +1,47 @@
+body,
+th,
+td {
+  text-align: center;
+}
+
+.table {
+  width: 25%;
+  margin: 50px auto;
+  background-color: #efefef;
+  border-radius: 5px;
+}
+
+.msg {
+  width: 23%;
+  margin: 20px auto;
+  padding: 20px 10px;
+  border: 1px solid #6306f9;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.title {
+  padding: 30px 10px;
+  font-size: 23px;
+}
+
+.cmn {
+  padding: 10px 10px;
+}
+
+.input-txt {
+  border: 1px solid #6306f9;
+}
+
+.input-txt:focus-visible {
+  outline: none;
+}
+
+.calculate {
+  margin: 30px;
+  padding: 7px 15px;
+  border: none;
+  background-color: #6306f9;
+  color: #fff;
+  border-radius: 5px;
+}

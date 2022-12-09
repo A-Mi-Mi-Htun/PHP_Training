@@ -1,0 +1,44 @@
+body,
+th,
+td {
+  text-align: center;
+}
+
+body {
+    background-color: #efefef;
+    outline: none;
+}
+
+.table {
+  width: 30%;
+  margin: 50px auto;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.title {
+  padding: 30px 10px;
+  font-size: 23px;
+}
+
+.cmn {
+  padding: 5px 10px;
+  margin: 10px 0;
+}
+
+.input-txt:hover {
+  border: 1px solid #f0fa22;
+}
+
+.input-txt:focus-visible {
+  outline: none;
+}
+
+.cmn-btn {
+  margin: 30px;
+  padding: 7px 15px;
+  border: none;
+  background-color: #f0fa22;
+  color: #313130;
+  border-radius: 5px;
+}

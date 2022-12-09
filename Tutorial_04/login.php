@@ -15,22 +15,39 @@ if(isset($_POST["submit"]) && !empty($_POST["email"]) && !empty($_POST["email"])
 } 
 ?>
 
-<table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial_04</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<table class="table">
     <form method="post">
         <tr>
-            <td><label for="name">name: </label></td>
-            <td><input type="name" id="name" name="name"></td>
+            <th colspan="2" class="title">Welcome back...</th>
         </tr>
         <tr>
-            <td><label for="email">email: </label></td>
-            <td><input type="email" id="email" name="email"></td>
+            <td><label class="cmn" for="name">Name: </label></td>
+            <td><input class="cmn input-txt" type="name" id="name" name="name" required></td>
         </tr>
         <tr>
-            <td><label for="password">password: </label></td>
-            <td><input type="password" id="password" name="password"></td>
+            <td><label class="cmn" for="email">Email: </label></td>
+            <td><input class="cmn input-txt" type="email" id="email" name="email" required></td>
         </tr>
         <tr>
-            <td style="text-align: center;" colspan="2"><input type="submit" value="Login" name="submit"></td>
+            <td><label class="cmn" for="password">Password: </label></td>
+            <td><input class="cmn input-txt" type="password" id="password" name="password" required></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button class="cmn-btn" type="submit" name="submit">Login</button></td>
         </tr>
     </form>
 </table>
+
+</body>
+</html>
