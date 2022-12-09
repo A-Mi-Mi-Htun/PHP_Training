@@ -1,28 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Functions</title>
-</head>
-<body>
-  <?php
-    function familyName($fname)
-    {
-      echo "$fname Schwazenegger <br>";
+<?php
+/**
+ * Strict Declaration
+ */
+declare (strict_types = 1);
+
+function add(int $x, int $y)
+{
+    return $x + $y;
+}
+//echo add(1.5, 2.5);
+echo add(5, 2) . "<br>";
+
+/**
+ * Function with default values
+ */
+function example($one, $two = 6)
+{
+    $sum = $one + $two;
+    echo "The sum is: $sum <br>";
+}
+example(10);
+example(2, 5);
+
+/**
+ * Function with parameters
+ */
+function familyName($fname)
+{
+    echo "$fname Schwazenegger <br>";
+}
+
+familyName("Arnold");
+familyName("Patrick");
+
+/**
+ * Function with return value
+ */
+function powerNumbers(int $x, int $y)
+{
+    $power = $x ** $y;
+    return $power;
+}
+
+echo "The answer is: " . powerNumbers(3, 5);
+
+/**
+ * Recursive function
+ */
+function recursive($number)
+{
+    if ($number <= 10) {
+        echo "$number <br>";
+        recursive($number + 1);
     }
+}
+recursive(4);
 
-    familyName("Arnold");
-    familyName("Patrick");
-
-    function powerNumbers(int $x, int $y)
-    {
-      echo $x ** $y . "<br>";
-    }
-
-    powerNumbers(3,5);
-    powerNumbers(5,8);
-  ?>
-</body>
-</html>
+/**
+ * Dynamic function call
+ */
+function sayHello()
+{
+    echo "Hello <br>";
+}
+$example = "sayHello";
+$example();
+?>
