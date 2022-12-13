@@ -1,0 +1,44 @@
+tr {
+  text-align: center;
+}
+
+/*Receiving data*/
+.qr-table {
+  width: 30%;
+  margin: 50px auto;
+  background-color: #fdf9f9;
+  border-radius: 5px;
+}
+
+.ttl {
+  padding: 30px 10px;
+  font-size: 23px;
+}
+
+.txt {
+  padding: 10px 20px;
+}
+
+.input-txt {
+  margin: 10px 0;
+  border: 1px solid #033b1d;
+  padding: 5px 5px;
+}
+
+.input-txt:focus-visible {
+  outline: none;
+}
+
+.btn {
+  margin: 30px;
+  padding: 7px 15px;
+  border: none;
+  background-color: #033b1d;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.qr-image {
+  width: 21%;
+  margin: 30px auto;
+}
