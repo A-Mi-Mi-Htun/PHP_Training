@@ -38,6 +38,10 @@ tr {
   border-radius: 5px;
 }
 
+.message {
+  color: #ff0000;
+}
+
 /*Image showing*/
 .image-box {
   width: 70%;
@@ -62,4 +66,9 @@ tr {
   background-color: #033b1d;
   color: #fff;
   border-radius: 5px;
+}
+
+.btn-txt {
+  text-decoration: none;
+  color: #fff;
 }
