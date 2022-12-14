@@ -16,7 +16,7 @@
 </table>
 <div class="qr-image">
 <?php
-require_once("library/phpqrcode-git/lib/full/qrlib.php");
+require_once("lib/lib/full/qrlib.php");
 if (isset($_POST["submit"])) {
     $text = $_POST["qr_text"];
 
