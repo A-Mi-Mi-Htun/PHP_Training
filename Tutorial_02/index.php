@@ -1,4 +1,7 @@
+<link rel="stylesheet" href="css/style.css">
 <?php
+echo "<h1 class='title'>Diamond Pattern</h1>";
+echo "<div class='table-star'>";
 $row = 6;
 
 $space = 10;
@@ -39,4 +42,5 @@ while ($x > 0) {
     echo "</br>";
     $space += 2;
 }
+echo "</div>";
 ?>

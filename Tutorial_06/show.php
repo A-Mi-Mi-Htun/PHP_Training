@@ -1,59 +1,67 @@
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/style.css">
 <div class="image-box">
-    <?php
-        //error_reporting(0);
+<?php
+$folder = "";
+$folder_err = "";
 
-        if(isset($_POST['submit'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            if(empty($_POST["folder"])) {
+    $input_folder = trim($_POST["folder"]);
+    if (empty($input_folder)) {
+        $folder_err = "Please select a folder.";
+    } elseif (!filter_var($input_folder, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
+        $folder_err = "Please type a valid folder name.";
+    } else {
+        $folder = $input_folder;
+    }
 
-                $msg_folder = "Please select folder name";
+    if (isset($_FILES["image"])) {
+        $file_size = $_FILES['image']['size'];
+        $file_tmp = $_FILES['image']['tmp_name'];
 
-            } 
-            
-            if (empty($_FILES["image"])) {
+        $file_info = finfo_open(FILEINFO_MIME_TYPE);
+        $file_type = finfo_file($file_info, $file_tmp);
 
-                $msg_image = "Please select file";
+        if ($file_type != "image/jpeg" || $file_type != "image/jpg" || $file_type != "image/png") {
+            echo "This is not an image";
+        }
 
-            } 
-   
-            if (isset($_FILES["image"])) {
-                
-                $directory = $_POST['folder'];
-                mkdir($directory);
-    
-                $errors = array();
-                $file_name = $_FILES['image']['name'];
-                $file_size = $_FILES['image']['size'];
-                $file_tmp = $_FILES['image']['tmp_name'];
-                
-                if ($file_size > 2000000) {
-                    $errors[] = "File size must be excately 2MB";
-                }
-                
-                if (empty($errors) == true) {
-                    $file_path = $directory . "/" . $file_name;
-                    move_uploaded_file($file_tmp, $file_path);
-                
-                    $dirname = $directory . "/";
-                    $images = glob($dirname . "*");
+        if ($file_size > 2000000) {
+            echo "File size must be excately 2MB";
+        }
+    }
+}
 
-                    foreach ($images as $image) {
-                        echo '<div class="img-info">';
-                        echo '<img class="img-file" src="' . $image . '" />';
-                        $image_path = $image;
-                        //echo $image_path;
-                        echo "<button class='del-btn'><a class='btn-txt' href='delete.php?id=$image_path'>Delete</a></button>";
-                        echo "</div>";
-                    }            
-                } else {
-                    print_r($errors);
-                }
-                
-                
-            }           
-        } 
-    ?>   
+$directory = $_POST['folder'];
+mkdir($directory);
+
+$file_name = $_FILES['image']['name'];
+$file_size = $_FILES['image']['size'];
+$file_tmp = $_FILES['image']['tmp_name'];
+
+$file_path = $directory . "/" . $file_name;
+move_uploaded_file($file_tmp, $file_path);
+
+$images = [];
+$main_paths = scandir(__DIR__);
+unset($main_paths[0], $main_paths[1]);
+foreach ($main_paths as $main_path) {
+    if (dir($main_path)) {
+        $child_paths = scandir($main_path);
+        unset($child_paths[0], $child_paths[1]);
+        foreach ($child_paths as $child_path) {
+            $images[] = $main_path . "/" . $child_path;
+        }
+    }
+}
+
+unset($images[0], $images[1]);
+foreach ($images as $image) {
+    echo '<div class="img-info">';
+    echo '<img class="img-file" src="' . $image . '" />';
+    echo "<button class='del-btn'><a class='btn-txt' href='delete.php?id=$image'>Delete</a></button>";
+    echo "</div>";
+}
+?>
 </div>
-

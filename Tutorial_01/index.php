@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <table class="table">
+<link rel="stylesheet" href="css/style.css">
+<table class="table-chess">
     <?php
         echo "<h1 class='title'>Chessboard</h1>";
         $col = 0;
@@ -28,6 +23,4 @@
             $col++;
         }
       ?>      
-    </table>
-</body>
-</html>
+</table>

@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutorial_04</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <table class="table">
-        <?php
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/style.css">
+<table class="table-four">
+    <?php
         session_start();
         if($_SESSION["valid"] == "true") {
             echo "<tr>";
@@ -26,7 +15,4 @@
             header("location:login.php");
         }
         ?>
-    </table>
-</body>
-
-</html>
+</table>

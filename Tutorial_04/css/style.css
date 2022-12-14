@@ -9,7 +9,7 @@ body {
     outline: none;
 }
 
-.table {
+.table-four {
   width: 30%;
   margin: 50px auto;
   background-color: #fff;
@@ -32,6 +32,11 @@ body {
 
 .input-txt:focus-visible {
   outline: none;
+}
+
+.message {
+  color: #ff0000;
+  margin: 10px 0 10px;
 }
 
 .cmn-btn {
