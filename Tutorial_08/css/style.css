@@ -1,0 +1,25 @@
+.wrapper{
+    width: 900px;
+    margin: 0 auto;
+}
+
+table tr td:nth-child(4){
+    width: 108px;
+}
+
+table tr td:nth-child(5){
+    width: 115px;
+}
+
+table tr td:last-child{
+    width: 250px;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    color: #fff;
+}
