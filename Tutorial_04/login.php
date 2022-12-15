@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-$name = $email = "";
-$name_err = $email_err = "";
+$name = $email = $password = "";
+$name_err = $email_err = $password_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
@@ -23,9 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $email = $input_email;
     }
+
+    $input_password = trim($_POST["password"]);
+    if (empty($input_password)) {
+        $password_err = "Please enter a password.";
+    } else {
+        $password = $input_password;
+    }
 }
 
-if(isset($_POST["submit"]) && !empty($_POST["email"]) && !empty($_POST["email"])) {
+if(isset($_POST["submit"]) && !empty($_POST["name"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
 
     if($_POST["email"] == "amimihtun4@gmail.com" && $_POST["password"]) {
         $_SESSION["name"] = $_POST["name"];
@@ -63,7 +70,10 @@ if(isset($_POST["submit"]) && !empty($_POST["email"]) && !empty($_POST["email"])
         </tr>
         <tr>
             <td><label class="cmn" for="password">Password: </label></td>
-            <td><input class="cmn input-txt" type="password" id="password" name="password"></td>
+            <td>
+                <input class="cmn input-txt" type="password" id="password" name="password">
+                <p class="message"><?php echo $password_err; ?></p>
+            </td>
         </tr>
         <tr>
             <td colspan="2"><button class="cmn-btn" type="submit" name="submit">Login</button></td>
