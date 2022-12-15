@@ -42,3 +42,8 @@ tr {
   width: 21%;
   margin: 30px auto;
 }
+
+.message {
+  color: #ff0000;
+  margin: 10px 0 10px;
+}
