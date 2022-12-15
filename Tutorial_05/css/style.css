@@ -1,0 +1,44 @@
+.container {
+  margin: 20px auto;
+  width: 35%;
+}
+
+.main-ttl {
+  text-align: center;
+  font-size: 25px;
+}
+
+.box-one,
+.box-two,
+.box-three,
+.box-four {
+  margin: 10px 50px;
+  border-bottom: 1px solid #000;
+}
+
+.ttl {
+  padding: 20px 0px;
+  text-align: center;
+}
+
+.txt {
+  padding-bottom: 30px;
+}
+
+.csv-table,
+.excel-table {
+  margin: 0 auto 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.csv-table tr,
+.csv-table td,
+.excel-table tr,
+.excel-table td {
+  border: 1px solid #000;
+}
+
+.box-three .txt {
+  line-height: 2;
+}
