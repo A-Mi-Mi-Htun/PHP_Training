@@ -1,4 +1,6 @@
 <?php
+$currentDate = "";
+
 if (isset($_POST["submit"])) {
     $date = $_POST["birth_date"];
     $currentDate = date("Y-m-d");
@@ -19,7 +21,7 @@ if (isset($_POST["submit"])) {
         </tr>
         <tr>
             <td><label class="cmn" for="birth_date">Date of Birth: </label></td>
-            <td><input class="cmn input-txt" type="date" id="birth_date" name="birth_date"></td>
+            <td><input class="cmn input-txt" type="date" max="<?php $currentDate ?>" id="birth_date" name="birth_date"></td>
         </tr>
         <tr>
             <td colspan="2"><button class="calculate" type="submit" name="submit">Calculate</button></td>
