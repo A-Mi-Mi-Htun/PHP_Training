@@ -15,22 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $folder = $input_folder;
     }
-
-    if (isset($_FILES["image"])) {
-        $file_size = $_FILES['image']['size'];
-        $file_tmp = $_FILES['image']['tmp_name'];
-
-        $file_info = finfo_open(FILEINFO_MIME_TYPE);
-        $file_type = finfo_file($file_info, $file_tmp);
-
-        if ($file_type != "image/jpeg" || $file_type != "image/jpg" || $file_type != "image/png") {
-            echo "This is not an image";
-        }
-
-        if ($file_size > 2000000) {
-            echo "File size must be excately 2MB";
-        }
-    }
 }
 
 $directory = $_POST['folder'];

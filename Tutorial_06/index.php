@@ -21,6 +21,7 @@ include("show.php")
             <td><label class="txt" for="image">Image: </label></td>
             <td>
                 <input class="" type="file" name="image" value="">
+                <p class="message"><?php if ($file_size >= 2000000) echo "File size too large!"; ?></p>
             </td>
         </tr>
         <tr>
