@@ -21,7 +21,7 @@ if (isset($_POST["submit"])) {
         </tr>
         <tr>
             <td><label class="cmn" for="birth_date">Date of Birth: </label></td>
-            <td><input class="cmn input-txt" type="date" max="<?php $currentDate ?>" id="birth_date" name="birth_date"></td>
+            <td><input class="cmn input-txt" type="date" onfocus="this.max=new Date().toISOString().split('T')[0]" id="birth_date" name="birth_date"></td>
         </tr>
         <tr>
             <td colspan="2"><button class="calculate" type="submit" name="submit">Calculate</button></td>
