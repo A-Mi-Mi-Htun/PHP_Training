@@ -5,7 +5,7 @@ $name = $email = $password = "";
 $name_err = $email_err = $password_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     $input_name = trim($_POST["name"]);
     if (empty($input_name)) {
         $name_err = "Please enter a name.";
@@ -32,9 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-if(isset($_POST["submit"]) && !empty($_POST["name"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
+if (isset($_POST["submit"]) && !empty($_POST["name"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
 
-    if($_POST["email"] == "amimihtun4@gmail.com" && $_POST["password"]) {
+    if ($_POST["email"] == "amimihtun4@gmail.com" && $_POST["password"] == "1234") {
         $_SESSION["name"] = $_POST["name"];
         $_SESSION["email"] = $_POST["email"];
         $_SESSION["password"] = $_POST["password"];
@@ -42,9 +42,10 @@ if(isset($_POST["submit"]) && !empty($_POST["name"]) && !empty($_POST["email"]) 
 
         header("location:index.php");
     } else {
-        header("location:login.php");
+        echo "<script>alert('Please try again. You are not an authorized user.')</script>";
+        //header("location:login.php");
     }
-} 
+}
 ?>
 
 <link rel="stylesheet" href="css/reset.css">
