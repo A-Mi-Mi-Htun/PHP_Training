@@ -2,26 +2,7 @@
 <link rel="stylesheet" href="css/style.css">
 <div class="qr-image">
 <?php
-require_once("lib/lib/full/qrlib.php");
-
 $text_err = "";
-
-if (isset($_POST["submit"])) {
-
-    $input_text = $_POST["qr_text"];
-    if (empty($input_text)) {
-      $text_err = "Please type text.";
-    } else {
-        $text = $input_text;
-
-        $save_txt = "generate/qr1.png";
-        $pixel_size = 30;
-        $frame_size = 10;
-        
-        QRcode::png($text, $save_txt, $pixel_size, $frame_size);
-        echo "<img src='generate/qr1.png'>";
-    }
-}
 ?>
 </div>
 <table class="qr-table">
@@ -30,7 +11,7 @@ if (isset($_POST["submit"])) {
             <td colspan="2"><h3 class="ttl">Let's create QR code.</h3></td>
         </tr>
         <tr>
-            <td><label class="txt" for="qr">Text: </label></td>
+            <td class="qr-align"><label class="txt" for="qr">Text: </label></td>
             <td>
                 <input class="input-txt" type="text" name="qr_text">
                 <p class="message"><?php echo $text_err; ?></p>
@@ -41,3 +22,27 @@ if (isset($_POST["submit"])) {
         </tr>
     </form>
 </table>
+<div class="qr-image">
+<?php
+require_once("lib/lib/full/qrlib.php");
+
+$text_err = "";
+
+if (isset($_POST["submit"])) {
+
+    $input_text = trim($_POST["qr_text"]);
+    if (empty($input_text)) {
+      $text_err = "Please type text.";
+    } else {
+        $text = $input_text;
+
+        $save_txt = "generate/" . $input_text . ".png";
+        $pixel_size = 25;
+        $frame_size = 10;
+        
+        QRcode::png($text, $save_txt, $pixel_size, $frame_size);
+        echo "<img src='generate/$input_text.png'>";
+    }
+}
+?>
+</div>

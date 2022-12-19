@@ -4,6 +4,16 @@
 <?php
 $folder = "";
 $folder_err = "";
+$image_err = "";
+
+$file_name = $_FILES['image']['name'];
+$file_size = $_FILES['image']['size'];
+$file_tmp = $_FILES['image']['tmp_name'];
+
+$directory = $_POST['folder'];
+mkdir($directory);
+
+$file_path = $directory . "/" . $file_name;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -15,17 +25,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $folder = $input_folder;
     }
+
+    if (!empty($file_name)) {
+        $allowed = array("gif", "jpg", "jpeg", "png");
+        $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+
+        if (($file_size < 2000000) && (in_array($ext, $allowed))) {
+            move_uploaded_file($file_tmp, $file_path);
+        } else {
+            $image_err = "Invalid file type";
+        }
+    } else {
+        $image_err = "Please select an image";
+    }
 }
-
-$directory = $_POST['folder'];
-mkdir($directory);
-
-$file_name = $_FILES['image']['name'];
-$file_size = $_FILES['image']['size'];
-$file_tmp = $_FILES['image']['tmp_name'];
-
-$file_path = $directory . "/" . $file_name;
-move_uploaded_file($file_tmp, $file_path);
 
 $images = [];
 $main_paths = scandir(__DIR__);
@@ -35,12 +48,14 @@ foreach ($main_paths as $main_path) {
         $child_paths = scandir($main_path);
         unset($child_paths[0], $child_paths[1]);
         foreach ($child_paths as $child_path) {
-            $images[] = $main_path . "/" . $child_path;
+            if ($main_path == "css") {
+                echo "";
+            } else {
+                $images[] = $main_path . "/" . $child_path;
+            }
         }
     }
 }
-
-unset($images[0], $images[1]);
 foreach ($images as $image) {
     echo '<div class="img-info">';
     echo '<img class="img-file" src="' . $image . '" />';

@@ -1,4 +1,5 @@
-tr {
+tr:first-child,
+tr:last-child {
   text-align: center;
 }
 
@@ -15,8 +16,12 @@ tr {
   font-size: 23px;
 }
 
+.qr-align {
+  text-align: right;
+}
+
 .txt {
-  padding: 10px 20px;
+  padding: 10px 32px;
 }
 
 .input-txt {

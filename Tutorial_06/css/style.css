@@ -1,4 +1,5 @@
-tr {
+tr:first-child,
+tr:last-child {
   text-align: center;
 }
 
@@ -16,13 +17,18 @@ tr {
 }
 
 .txt {
-  padding: 10px 20px;
+  padding: 10px 20px 10px 48px;
+}
+
+.align-label {
+  text-align: right;
 }
 
 .input-txt {
   margin: 10px 0;
   border: 1px solid #033b1d;
-  padding: 5px 5px;
+  padding: 5px 5px 5px 10px;
+  text-align: left;
 }
 
 .input-txt:focus-visible {

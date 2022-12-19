@@ -1,27 +1,27 @@
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/style.css">
-<?php 
-error_reporting(0); 
-include("show.php") 
+<?php
+error_reporting(0);
+$folder_err = "";
+$image_err = "";
 ?>
-
 <table class="data-table">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
         <tr>
             <td colspan="2"><h3 class="ttl">Tutorial_06</h3></td>
         </tr>
         <tr>
-            <td><label class="txt" for="folder">Folder Name: </label></td>
+            <td class="align-label"><label class="txt" for="folder">Folder Name: </label></td>
             <td>
                 <input type="text" name="folder" class="input-txt" value="<?php echo $folder; ?>">
                 <p class="message"><?php echo $folder_err; ?></p>
             </td>
         </tr>
         <tr>
-            <td><label class="txt" for="image">Image: </label></td>
+            <td class="align-label"><label class="txt" for="image">Image: </label></td>
             <td>
                 <input class="" type="file" name="image" value="">
-                <p class="message"><?php if ($file_size >= 2000000) echo "File size too large!"; ?></p>
+                <p class="message"><?php echo $image_err; ?></p>
             </td>
         </tr>
         <tr>
@@ -29,4 +29,6 @@ include("show.php")
         </tr>
     </form>
 </table>
-
+<?php
+include "show.php"
+?>
