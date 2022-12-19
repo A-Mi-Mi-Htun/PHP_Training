@@ -4,6 +4,8 @@
 error_reporting(0);
 $folder_err = "";
 $image_err = "";
+
+include "show.php";
 ?>
 <table class="data-table">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
@@ -29,6 +31,3 @@ $image_err = "";
         </tr>
     </form>
 </table>
-<?php
-include "show.php"
-?>
