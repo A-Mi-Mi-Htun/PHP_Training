@@ -26,10 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $content = $input_content;
     }
 
-    if (empty($_POST["is_published"])) {
-        $is_published = false;
+    if ($_POST["is_published"] == "0") {
+        $is_published = "0";
     } else {
-        $is_published = true;
+        $is_published = "1";
     }
 
     // Check input errors before inserting in database
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link rel="stylesheet" href="library/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
 
-<div class="wrapper">
+<div class="wrapper w-50 mt-5">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <span class="invalid-feedback"><?php echo $content_err; ?></span>
                             </div>
                             <div class="mb-3">
-                                <input type="checkbox" name="is_published" class=""></input>
+                                <input type="checkbox" name="is_published" value="0">
                                 <label>Publish</label>
                             </div>
                             <div class="mb-3">

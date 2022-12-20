@@ -55,7 +55,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
 <link rel="stylesheet" href="library/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
 
-<div class="wrapper">
+<div class="wrapper w-50 mt-5">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -68,8 +68,8 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                             <h5><?php echo $title; ?></h5>
                         </div>
                         <div class="mb-3 ">
-                            <?php echo "<i>" . ($is_published) ? "Published </i>" : "Unpublished </i>";
-echo "<span> at " . $created_datetime . "</span>"; ?>
+                            <?php echo ($is_published) ? "<i> Published </i>" : "<i> Unpublished </i>";
+                            echo "<span> at " . $created_datetime . "</span>"; ?>
                         </div>
                         <div class="mb-3">
                             <p><?php echo $row["content"]; ?></p>
