@@ -26,10 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $content = $input_content;
     }
 
-    if ($_POST["is_published"] == "0") {
-        $is_published = "0";
+    if (isset($_POST["is_published"])) {
+        $post_published = "1";
     } else {
-        $is_published = "1";
+        $post_published = "0";
     }
 
     // Check input errors before inserting in database
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Set parameters
             $param_title = $title;
             $param_content = $content;
-            $param_published = $is_published;
+            $param_published = $post_published;
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <span class="invalid-feedback"><?php echo $content_err; ?></span>
                             </div>
                             <div class="mb-3">
-                                <input type="checkbox" name="is_published" value="0">
+                                <input type="checkbox" name="is_published" value="is_published">
                                 <label>Publish</label>
                             </div>
                             <div class="mb-3">

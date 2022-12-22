@@ -30,10 +30,10 @@ if (isset($_POST["submit"])) {
     
     $post_content = $_POST["content"];
 
-    if (empty($_POST["is_published"])) {
-        $post_published = "0";
-    } else {
+    if (isset($_POST["is_published"])) {
         $post_published = "1";
+    } else {
+        $post_published = "0";
     }
 
     $sql = "UPDATE posts SET title = '$post_title', content = '$post_content', is_published = $post_published WHERE id = $id";
@@ -67,7 +67,7 @@ if (isset($_POST["submit"])) {
                                 <span class="invalid-feedback"><?php echo $content_err; ?></span>
                             </div>
                             <div class="mb-3">
-                                <input type="checkbox" name="is_published" value="0">
+                                <input type="checkbox" name="is_published" value="is_published">
                                 <label>Publish</label>
                             </div>
                             <div class="mb-3">
