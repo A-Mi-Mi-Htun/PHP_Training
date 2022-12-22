@@ -1,0 +1,32 @@
+.wrapper{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.height {
+    height: 80vh;
+}
+
+.img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.profile-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.hidden {
+    display: none;
+}
+
+.upload-btn {
+    color: #00ffff;
+    padding: 0.5rem 1rem;
+    border-radius: 1.3rem;
+    cursor: pointer;
+    border: 1px solid #00ffff;
+}
