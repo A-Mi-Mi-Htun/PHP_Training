@@ -26,9 +26,23 @@ if (isset($_GET["id"])) {
 if (isset($_POST["submit"])) {
     $id = $_GET["id"];
 
-    $post_title = $_POST["title"];
-    
-    $post_content = $_POST["content"];
+    // Validate name
+    $input_ttl = trim($_POST["title"]);
+    if (empty($input_ttl)) {
+        $ttl_err = "Please enter a title.";
+    } elseif (!filter_var($input_ttl, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
+        $ttl_err = "Please enter a valid title.";
+    } else {
+        $post_title = $input_ttl;
+    }
+
+    // Validate content
+    $input_content = trim($_POST["content"]);
+    if (empty($input_content)) {
+        $content_err = "Please enter an content.";
+    } else {
+        $post_content = $input_content;
+    }
 
     if (isset($_POST["is_published"])) {
         $post_published = "1";
@@ -36,9 +50,11 @@ if (isset($_POST["submit"])) {
         $post_published = "0";
     }
 
-    $sql = "UPDATE posts SET title = '$post_title', content = '$post_content', is_published = $post_published WHERE id = $id";
-    $conn->query($sql);
-    header("location:index.php");
+    if (!empty($post_title) && !empty($post_content)) {
+        $sql = "UPDATE posts SET title = '$post_title', content = '$post_content', is_published = $post_published WHERE id = $id";
+        $conn->query($sql);
+        header("location:index.php");
+    }
 }
 ?>
 

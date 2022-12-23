@@ -41,50 +41,50 @@ if (isset($_GET["id"])) {
                     </div>
                     <div class="card-body">
                         <?php
-// Include config file
-require_once "config.php";
+                    // Include config file
+                    require_once "config.php";
 
-//Attempt select query execution
-$sql = "SELECT * FROM posts";
-if ($result = $conn->query($sql)) {
-    if ($result->num_rows > 0) {
-        echo '<table class="table table-bordered table-striped">';
-        echo "<thead>";
-        echo "<tr>";
-        echo "<th>ID</th>";
-        echo "<th>Title</th>";
-        echo "<th>Content</th>";
-        echo "<th>Is Published</th>";
-        echo "<th>Created Date</th>";
-        echo "<th>Actions</th>";
-        echo "</tr>";
-        echo "</thead>";
-        echo "<tbody>";
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<th>" . $row['id'] . "</th>";
-            echo "<td>" . $row['title'] . "</td>";
-            echo "<td>" . $row['content'] . "</td>";
-            echo ($row['is_published']) ? "<td>Published</td>" : "<td>Unpublished</td>";
-            echo "<td>" . $row['created_datetime'] . "</td>";
-            echo "<td>";
-            echo '<button class="btn btn-info me-3"><a href="read.php?id=' . $row['id'] . '">View</a></button>';
-            echo '<button class="btn btn-success me-3"><a href="update.php?id=' . $row['id'] . '">Edit</a></button>';
-            echo '<button name="delete" class="btn btn-danger me-3"><a href="index.php?id=' . $row['id'] . '">Delete</a></button>';
-            echo "</td>";
-            echo "</tr>";
-        }
-        echo "</tbody>";
-        echo "</table>";
-    } else {
-        echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
-    }
-} else {
-    echo "Oops! Something went wrong. Please try again later.";
-}
-//Close connection
-//$conn->close($link);
-?>
+                    //Attempt select query execution
+                    $sql = "SELECT * FROM posts";
+                    if ($result = $conn->query($sql)) {
+                        if ($result->num_rows > 0) {
+                            echo '<table class="table post-table table-bordered table-striped">';
+                            echo "<thead>";
+                            echo "<tr>";
+                            echo "<th>ID</th>";
+                            echo "<th>Title</th>";
+                            echo "<th>Content</th>";
+                            echo "<th>Is Published</th>";
+                            echo "<th>Created Date</th>";
+                            echo "<th>Actions</th>";
+                            echo "</tr>";
+                            echo "</thead>";
+                            echo "<tbody>";
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<th>" . $row['id'] . "</th>";
+                                echo "<td>" . $row['title'] . "</td>";
+                                echo "<td>" . $row['content'] . "</td>";
+                                echo ($row['is_published']) ? "<td>Published</td>" : "<td>Unpublished</td>";
+                                echo "<td>" . $row['created_datetime'] . "</td>";
+                                echo "<td>";
+                                echo '<button class="btn btn-info me-3"><a class="text-decoration-none text-white" href="read.php?id=' . $row['id'] . '">View</a></button>';
+                                echo '<button class="btn btn-success me-3"><a class="text-decoration-none text-white" href="update.php?id=' . $row['id'] . '">Edit</a></button>';
+                                echo '<button name="delete" class="btn btn-danger me-3"><a class="text-decoration-none text-white" href="index.php?id=' . $row['id'] . '">Delete</a></button>';
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+                            echo "</tbody>";
+                            echo "</table>";
+                        } else {
+                            echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                        }
+                    } else {
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
+                    //Close connection
+                    //$conn->close($link);
+                    ?>
 
                     </div>
                 </card>

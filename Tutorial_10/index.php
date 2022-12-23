@@ -12,9 +12,9 @@ $email = ""; ?>
     <div class="wrapper">
         <div class="row">
             <div class="col-md-12">
-                <ul class="nav pt-3 justify-content-between">
+                <ul class="nav pt-3 pb-3 justify-content-between">
                     <li class="nav-item">
-                        <p class="nav-link text-dark">Home</p>
+                        <a href="index.php" class="nav-link text-dark text-decoration-none">Home</a>
                     </li>
                     <?php
                     session_start();

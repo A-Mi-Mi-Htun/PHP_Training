@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
+    <div class="container-fluid w-50">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-sm-12">
                 @yield('content')
             </div>
         </div>

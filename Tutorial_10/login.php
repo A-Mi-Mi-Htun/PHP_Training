@@ -4,7 +4,8 @@ require_once "config.php";
 session_start();
 
 // Define variables and initialize with empty values
-$email = $password = $error = $email_check = "";
+$id = NULL;
+$email = $password = $error = $email_check = $password_check = "";
 $email_err = $password_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -35,11 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $email_check = $row["email"];
                 $password_check = $row["password"];
                 $id = $row["id"];
+                //echo $id;
             }
         }
     }
 
-    if ($email_check == $_POST["email"] && $password_check == $_POST["password"]) {
+    if ($email_check == $_POST["email"] && $password_check == $_POST["password"] && !empty($email) && !empty($password)) {
         $_SESSION["email"] = $email_check;
         $_SESSION["password"] = $password_check;
         header("location:index.php");
@@ -77,7 +79,7 @@ $conn->close();
                                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
                             </div>
                             <div class="form-group mb-3">
-                                <a href="forget_password.php?id=<?php echo $id ?>" class="text-decoration-none">forget password?</a>
+                                <a href="forget_password.php?id=<?php echo $id; ?>" class="text-decoration-none">forget password?</a>
                             </div>
                             <div class="form-group mb-3 d-grid gap-2">
                                 <input type="submit" class="btn btn-primary" value="Login">

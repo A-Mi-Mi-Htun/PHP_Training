@@ -3,30 +3,21 @@
   margin: 0 auto;
 }
 
-table tr td:nth-child(3) {
+.post-table tr td:nth-child(3) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 50ch;
 }
 
-table tr td:nth-child(4) {
+.post-table tr td:nth-child(4) {
   width: 108px;
 }
 
-table tr td:nth-child(5) {
+.post-table tr td:nth-child(5) {
   width: 115px;
 }
 
-table tr td:last-child {
+.post-table tr td:last-child {
   width: 250px;
-}
-
-a {
-  text-decoration: none;
-  color: #fff;
-}
-
-a:hover {
-  color: #fff;
 }
