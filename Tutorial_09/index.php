@@ -49,7 +49,7 @@ if (isset($_GET["id"])) {
                         $sql = "SELECT * FROM posts";
                         if ($result = $conn->query($sql)) {
                             if ($result->num_rows > 0) {
-                                echo '<table class="table table-bordered table-striped">';
+                                echo '<table class="table post-table table-bordered table-striped">';
                                     echo "<thead>";
                                         echo "<tr>";
                                             echo "<th>ID</th>";
@@ -67,11 +67,11 @@ if (isset($_GET["id"])) {
                                             echo "<td>" . $row['title'] . "</td>";
                                             echo "<td>" . $row['content'] . "</td>";
                                             echo ($row['is_published']) ? "<td> Published </td>" : "<td> Unpublished </td>";
-                                            echo "<td>" . $row['created_datetime'] . "</td>";
+                                            echo "<td>" . date_format(date_create($row['created_datetime']), "M d, y") . "</td>";
                                             echo "<td>";
-                                                echo '<button class="btn btn-info me-3"><a href="read.php?id='. $row['id'] .'">View</a></button>';
-                                                echo '<button class="btn btn-success me-3"><a href="update.php?id='. $row['id'] .'">Edit</a></button>';
-                                                echo '<button class="btn btn-danger me-3"><a href="index.php?id='. $row['id'] .'">Delete</a></button>';
+                                                echo '<button class="btn btn-info me-1"><a class="text-decoration-none text-white" href="read.php?id='. $row['id'] .'">View</a></button>';
+                                                echo '<button class="btn btn-success me-1"><a class="text-decoration-none text-white" href="update.php?id='. $row['id'] .'">Edit</a></button>';
+                                                echo '<button class="btn btn-danger me-1"><a class="text-decoration-none text-white" href="index.php?id='. $row['id'] .'">Delete</a></button>';
                                             echo "</td>";
                                         echo "</tr>";
                                     }

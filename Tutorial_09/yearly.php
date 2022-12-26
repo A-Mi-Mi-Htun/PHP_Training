@@ -23,7 +23,7 @@
                     require_once "config.php";
 
                     //Attempt select query execution
-                    $sql = 'SELECT created_datetime FROM posts WHERE DATE(created_datetime) BETWEEN "2021-12-19" AND NOW() GROUP BY created_datetime';
+                    $sql = 'SELECT created_datetime FROM posts WHERE DATE(created_datetime) BETWEEN YEAR(created_datetime) AND NOW() GROUP BY created_datetime';
                     $result = $conn->query($sql);
 
                     while ($row = $result->fetch_assoc()) {

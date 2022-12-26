@@ -16,6 +16,7 @@ if (isset($_GET["id"])) {
             while ($row = $result->fetch_assoc()) {
                 $title = $row["title"];
                 $content = $row["content"];
+                $is_published = $row["is_published"];
             }
 
         } else {
@@ -83,8 +84,13 @@ if (isset($_POST["submit"])) {
                                 <span class="invalid-feedback"><?php echo $content_err; ?></span>
                             </div>
                             <div class="mb-3">
-                                <input type="checkbox" name="is_published" value="is_published"></input>
-                                <label>Publish</label>
+                                <?php 
+                                if ($is_published == "1") { ?>
+                                    <input type="checkbox" name="is_published" id="is_published" checked>
+                                <?php } else { ?>
+                                    <input type="checkbox" name="is_published" id="is_published">
+                                <?php } ?>
+                                <label for="is_published">Publish</label>
                             </div>
                             <div class="mb-3">
                                 <a href="index.php" class="btn pull-left btn-secondary">Back</a>

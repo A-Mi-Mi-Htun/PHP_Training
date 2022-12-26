@@ -23,7 +23,7 @@
                     require_once "config.php";
 
                     //Attempt select query execution
-                    $sql = 'SELECT created_datetime FROM posts WHERE DATE(created_datetime) BETWEEN "2022-12-13" AND NOW() GROUP BY created_datetime';
+                    $sql = 'SELECT created_datetime FROM posts WHERE DATE(created_datetime) BETWEEN (created_datetime - INTERVAL 1 WEEK) AND NOW() GROUP BY created_datetime';
                     $result = $conn->query($sql);
 
                     while ($row = $result->fetch_assoc()) {
@@ -33,7 +33,7 @@
                     $created_datetime = json_encode($created);
                     var_dump($created_datetime);
 
-                    $arr = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+                    $arr = array("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
                     $array = json_encode($arr);
 
                     $newarr = array(0, 0, 0, 0, 0, 0, 0);
@@ -46,8 +46,8 @@
                     //or zero when two values of two arrays are not equal
                     for ($i = 0; $i < $arr_length; $i++) {
                         for ($j = 0; $j < $created_length; $j++) {
-                            if ($array[$i] == $created_datetime[$j]) {
-                                $count = $count + 1;
+                            if ($arr[$i] == $created[$j]) {
+                                $count += 1;
                             }
                             $newarr[$i] = $count;
                         }

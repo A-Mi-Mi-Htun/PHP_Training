@@ -23,9 +23,10 @@
                     require_once "config.php";
 
                     //Attempt select query execution
-                    $sql = 'SELECT created_datetime FROM posts WHERE DATE(created_datetime) BETWEEN "2022-11-19" AND NOW() GROUP BY created_datetime';
+                    $sql = 'SELECT created_datetime FROM posts WHERE DATE(created_datetime) BETWEEN (created_datetime - INTERVAL 1 MONTH) AND NOW() GROUP BY created_datetime';
                     $result = $conn->query($sql);
 
+                    
                     while ($row = $result->fetch_assoc()) {
                         $created[] = date_format(date_create($row["created_datetime"]), "M");
                     }
@@ -33,7 +34,7 @@
                     $created_datetime = json_encode($created);
                     var_dump($created_datetime);
 
-                    $arr = array("January", "February", "March", "April", "May", "June", "July","August","September","October","November","December");
+                    $arr = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug","Sep","Oct","Nov","Dec");
                     $array = json_encode($arr);
 
                     $newarr = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -46,7 +47,7 @@
                     //or zero when two values of two arrays are not equal
                     for ($i = 0; $i < $arr_length; $i++) {
                         for ($j = 0; $j < $created_length; $j++) {
-                            if ($array[$i] == $created_datetime[$j]) {
+                            if ($arr[$i] == $created[$j]) {
                                 $count = $count + 1;
                             }
                             $newarr[$i] = $count;
