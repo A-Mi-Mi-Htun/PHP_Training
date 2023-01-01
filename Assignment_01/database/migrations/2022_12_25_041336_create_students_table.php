@@ -17,12 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->integer('phone');
+            $table->bigInteger('phone');
             $table->text('address');
-            $table->integer('major_id');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
-            $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');
+            $table->foreignId('major_id')->references('id')->on('majors')->onDelete('cascade');
         });
     }
 
