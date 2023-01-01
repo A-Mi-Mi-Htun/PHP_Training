@@ -24,28 +24,28 @@
                             <div class="form-group mb-3">
                                 <label for="name" class="col-12 control-label mb-2">Name</label>
                                 <div class="col-12">
-                                    <input type="text" name="name" id="name" class="form-control">
+                                    <input type="text" name="name" id="name" class="form-control" value="{{ Request::old('name') }}">
                                     
                                 </div>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email" class="col-12 control-label mb-2">Email</label>
                                 <div class="col-12">
-                                    <input type="email" name="email" id="name" class="form-control">
+                                    <input type="email" name="email" id="name" class="form-control" value="{{ Request::old('email') }}">
                                     
                                 </div>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="phone" class="col-12 control-label mb-2">Phone</label>
                                 <div class="col-12">
-                                    <input type="number" name="phone" id="phone" class="form-control">
+                                    <input type="number" name="phone" id="phone" class="form-control" value="{{ Request::old('phone') }}">
                                     
                                 </div>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="address" class="col-12 control-label mb-2">Address</label>
                                 <div class="col-12">
-                                    <input type="text" name="address" id="address" class="form-control">
+                                    <input type="text" name="address" id="address" class="form-control" value="{{ Request::old('address') }}">
                                     
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                 <label for="major" class="col-12 control-label mb-2">Major</label>
                                 <div class="col-12">
                                     <select name="major" id="major" class="form-control">
-                                        <option value="" selected disabled>Select Major</option>
+                                        <option value="{{ Request::old('major') }}" selected disabled>Select Major</option>
                                         @foreach(App\Models\Major::all() as $major)
                                         <option value="{{ $major->id }}">{{ $major->name }}</option>
                                         @endforeach

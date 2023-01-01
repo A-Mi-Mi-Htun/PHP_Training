@@ -23,7 +23,7 @@
                     require_once "config.php";
 
                     //Attempt select query execution
-                    $sql = 'SELECT created_datetime FROM posts WHERE DATE(created_datetime) BETWEEN (created_datetime - INTERVAL 1 WEEK) AND NOW() GROUP BY created_datetime';
+                    $sql = 'SELECT created_datetime FROM posts WHERE MONTH(created_datetime) = MONTH(NOW()) AND YEAR(created_datetime) = YEAR(NOW()) GROUP BY created_datetime';
                     $result = $conn->query($sql);
 
                     while ($row = $result->fetch_assoc()) {
@@ -33,7 +33,7 @@
                     $created_datetime = json_encode($created);
                     var_dump($created_datetime);
 
-                    $arr = array("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
+                    $arr = array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
                     $array = json_encode($arr);
 
                     $newarr = array(0, 0, 0, 0, 0, 0, 0);
@@ -68,7 +68,7 @@
     var myChart = new Chart(chart, {
         type: "bar",
         data: {
-            labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
             datasets: [{
                 label: "# weekly created posts",
                 data: <?php echo json_encode($newarr); ?> ,

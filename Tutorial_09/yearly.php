@@ -23,40 +23,39 @@
                     require_once "config.php";
 
                     //Attempt select query execution
-                    $sql = 'SELECT created_datetime FROM posts WHERE DATE(created_datetime) BETWEEN YEAR(created_datetime) AND NOW() GROUP BY created_datetime';
+                    $sql = 'SELECT created_datetime FROM posts WHERE MONTH(created_datetime) = MONTH(NOW()) AND YEAR(created_datetime) = YEAR(NOW()) GROUP BY created_datetime';
                     $result = $conn->query($sql);
 
+                    
                     while ($row = $result->fetch_assoc()) {
-                        $created[] = date_format(date_create($row["created_datetime"]), "y-m-d");
+                        $created[] = date_format(date_create($row["created_datetime"]), "M");
                     }
 
-                    //To create array that doesn't include duplicated values
-                    $none = array_unique($created);
+                    $created_datetime = json_encode($created);
+                    var_dump($created_datetime);
 
-                    //To create array that only includes values
-                    $anone = array_values($none);
-                    //var_dump($anone);
+                    $arr = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug","Sep","Oct","Nov","Dec");
+                    $array = json_encode($arr);
 
-                    $color_length = count($anone);
+                    $newarr = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    $count = 0;
 
-                    //To get array values are how many times duplicated
-                    $nooftime = array_count_values($created);
+                    $arr_length = count($arr);
+                    $created_length = count($created);
 
-                    //To create array that only includes values
-                    $antime = array_values($nooftime);
-                    //var_dump($nooftime);
-
-                    //Using json_decode is to remove " from start and end of the array
-                    $encode_none = json_decode(json_encode($anone));
-                    $encode_count = json_decode(json_encode($antime));
-                    var_dump($encode_none);
-                    var_dump($encode_count);
-
-                    //Color array
-                    $colorarr = array();
-                    for ($i = 0; $i < $color_length; $i++){
-                        $colorarr[$i] = "#00ffff";
+                    //To create array | origin values when values of two arrays are same 
+                    //or zero when two values of two arrays are not equal
+                    for ($i = 0; $i < $arr_length; $i++) {
+                        for ($j = 0; $j < $created_length; $j++) {
+                            if ($arr[$i] == $created[$j]) {
+                                $count = $count + 1;
+                            }
+                            $newarr[$i] = $count;
+                        }
+                        $count = 0;
                     }
+                    //var_dump($newarr);
+
                     //Close connection
                     //$conn->close($link);
                     ?>
@@ -70,20 +69,31 @@
     var myChart = new Chart(chart, {
         type: "bar",
         data: {
-            labels: <?php echo json_encode($encode_none); ?> ,
-            datasets : [{
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            datasets: [{
                 label: "# yearly created posts",
-                data: <?php echo json_encode($encode_count); ?> ,
-                backgroundColor : <?php echo json_encode($colorarr); ?>
+                data: <?php echo json_encode($newarr); ?> ,
+                backgroundColor : [
+                    "#00ffff",
+                    "#00ffff",
+                    "#00ffff",
+                    "#00ffff",
+                    "#00ffff",
+                    "#00ffff",
+                    "#00ffff",
+                    "#00ffff",
+                    "#00ffff",
+                    "#00ffff",
+                    "#00ffff",
+                    "#00ffff"
+                ]
             }]
         },
         options: {
             scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+                y: {
+                    beginAtZero: true
+                }
             }
         }
     });

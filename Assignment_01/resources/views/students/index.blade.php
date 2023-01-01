@@ -9,7 +9,7 @@
 <body>
     <div class="container-fluid bg-light">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-sm-12">
                 <ul class="nav pt-3 pb-3 justify-content-around">
                     <li class="nav-item">
                         <a href="index.php" class="nav-link text-dark text-decoration-none">Home</a>
@@ -24,9 +24,9 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid w-50">
+    <div class="container-fluid">
         <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-sm-12 mt-3">
+            <div class="col-sm-8 mt-3">
                 @if (session('info'))
                     <div class="alert alert-info">
                         {{ session('info') }}
@@ -35,7 +35,7 @@
                 @include('common.errors')
                 <a href="{{ url('/create') }}" class="btn btn-primary">Create</a>
             </div>
-            <div class="col-sm-12 mt-3">
+            <div class="col-sm-8 mt-3">
                 <div class="card">
                     <h5 class="card-header">Student Lists</h5>
                     <div class="card-body">

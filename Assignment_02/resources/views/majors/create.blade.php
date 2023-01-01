@@ -46,7 +46,6 @@
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-                                <a href="{{ url('/') }}" class="btn btn-secondary me-3">Back</a>
                                 <button type="submit" class="btn btn-primary">Create</button>
                             </div>
                         </div>

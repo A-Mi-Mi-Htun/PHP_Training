@@ -13,7 +13,7 @@
 
             <div class="d-flex">
                 <div class="col-sm-8 me-3">
-                    <input type="text" name="name" id="task-name" class="form-control">
+                    <input type="text" name="name" id="task-name" class="form-control" value="{{ $task->name }}">
                 </div>
     
                 <div class="col-sm-4">

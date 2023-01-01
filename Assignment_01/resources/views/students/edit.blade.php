@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 </head>
 <body>
-    <div class="container-fluid w-50">
+    <div class="container-fluid">
         <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-sm-12 mt-5">
+            <div class="col-sm-8 mt-5">
                 <div class="card">
                     <h5 class="card-header">Edit Student</h5>
                     <div class="card-body">
@@ -21,36 +21,36 @@
                         @include('common.errors')
                         <form action="{{ url('/update/'.$student->id) }}" method="POST">
                             @csrf
-                            <div class="form-group">
-                                <label for="name" class="col-12 control-label">Name</label>
+                            <div class="form-group mb-3">
+                                <label for="name" class="col-12 control-label mb-1">Name</label>
                                 <div class="col-12">
                                     <input type="text" name="name" id="name" class="form-control" value="{{ $student->name }}">
 
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email" class="col-12 control-label">Email</label>
+                            <div class="form-group mb-3">
+                                <label for="email" class="col-12 control-label mb-1">Email</label>
                                 <div class="col-12">
                                     <input type="email" name="email" id="name" class="form-control" value="{{ $student->email }}">
                                     
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="phone" class="col-12 control-label">Phone</label>
+                            <div class="form-group mb-3">
+                                <label for="phone" class="col-12 control-label mb-1">Phone</label>
                                 <div class="col-12">
                                     <input type="number" name="phone" id="phone" class="form-control" value="{{ $student->phone }}">
                                     
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="address" class="col-12 control-label">Address</label>
+                            <div class="form-group mb-3">
+                                <label for="address" class="col-12 control-label mb-1">Address</label>
                                 <div class="col-12">
                                     <input type="text" name="address" id="address" class="form-control" value="{{ $student->address }}">
                                     
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="major" class="col-12 control-label">Major</label>
+                            <div class="form-group mb-3">
+                                <label for="major" class="col-12 control-label mb-1">Major</label>
                                 <div class="col-12">
                                     <select name="major" id="major" class="form-control">
                                         <option value="" disabled>Select Major</option>

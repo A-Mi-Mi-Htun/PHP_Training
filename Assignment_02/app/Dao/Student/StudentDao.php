@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Dao\Student;
-
 use App\Models\Student;
-use App\Contracts\Dao\Student\StudentDaoInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Contracts\Dao\Student\StudentDaoInterface;
 
 /**
  * Data accessing object for student
@@ -19,12 +19,8 @@ class StudentDao implements StudentDaoInterface
      */
     public function index()
     {
-        if (request()->filled('search')) {
-            $students = Student::search(request()->search)->get();
-        } else {
-            $students = Student::get();
-        }
-        return $students;
+        $students = Student::get();
+        return $students;        
     }
 
     /**
@@ -91,5 +87,15 @@ class StudentDao implements StudentDaoInterface
             'major_id' => $major_id
         ]);
         return $name;
+    }
+
+    public function importStudent()
+    {
+        return $this->studentdao->importStudent();
+    }
+
+    public function exportStudent()
+    {
+        return $this->studentdao->exportStudent();
     }
 }

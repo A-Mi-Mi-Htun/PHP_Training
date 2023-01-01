@@ -24,9 +24,9 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid w-50">
+    <div class="container-fluid">
         <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-sm-12 mt-3">
+            <div class="col-sm-6 mt-3">
                 @if (session('info'))
                     <div class="alert alert-info">
                         {{ session('info') }}
@@ -46,7 +46,6 @@
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-                                <a href="{{ url('/') }}" class="btn btn-secondary me-3">Back</a>
                                 <button type="submit" class="btn btn-primary">Create</button>
                             </div>
                         </div>
