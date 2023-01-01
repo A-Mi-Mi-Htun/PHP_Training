@@ -3,56 +3,68 @@
 require_once "config.php";
 session_start();
 // Define variables and initialize with empty values
-$name = $email = $error = "";
+$name = $email = $error = $old_email = $old_name = "";
 $name_err = $email_err = "";
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email_check = $_SESSION["email"];
-    // Validate name
-    $input_name = trim($_POST["name"]);
-    if (empty($input_name)) {
-        $name_err = "Please enter a name.";
-    } elseif (!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
-        $name_err = "Please enter a valid name.";
-    } else {
-        $name = $input_name;
-    }
+if ($_SESSION["valid"] == 'true') {
 
-    // Validate email
-    $input_email = trim($_POST["email"]);
-    if (empty($input_email)) {
-        $email_err = "Please enter a email.";
-    } elseif (!filter_var($input_email, FILTER_VALIDATE_EMAIL, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
-        $email_err = "Please enter a valid email.";
-    } else {
-        $email = $input_email;
-    }
-
-    $image_name = $_FILES["img"]["name"];
-    $image_size = $_FILES["img"]["size"];
-    $image_tmp = $_FILES["img"]["tmp_name"];
-
-    $target_dir = "img/";
-    if (!is_dir($target_dir)) {
-        mkdir($target_dir);
-    }
-    $target_file = $target_dir . $image_name;
-
-    $allowed = array("gif", "jpg", "jpeg", "png");
-    $ext = pathinfo($image_name, PATHINFO_EXTENSION);
-
-    if ($image_size < 200000 && (in_array($ext, $allowed))) {
-        if(move_uploaded_file($image_tmp, $target_file)) {
-            $sql = "UPDATE user SET img='$image_name' WHERE email='$email_check'";
-            $conn->query($sql);
-            header("location:profile.php");
-        } 
-    } else {
-        $error = "Sorry! Something went wrong.";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $email_check = $_SESSION["email"];
+        // Validate name
+        $input_name = trim($_POST["name"]);
+        if (empty($input_name)) {
+            $name_err = "Please enter a name.";
+        } elseif (!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
+            $name_err = "Please enter a valid name.";
+        } else {
+            $name = $input_name;
+        }
+    
+        // Validate email
+        $input_email = trim($_POST["email"]);
+        if (empty($input_email)) {
+            $email_err = "Please enter a email.";
+        } elseif (!filter_var($input_email, FILTER_VALIDATE_EMAIL, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
+            $email_err = "Please enter a valid email.";
+        } else {
+            $email = $input_email;
+        }
+    
+        $image_name = $_FILES["img"]["name"];
+        $image_size = $_FILES["img"]["size"];
+        $image_tmp = $_FILES["img"]["tmp_name"];
+    
+        $target_dir = "img/";
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir);
+        }
+        $target_file = $target_dir . $image_name;
+    
+        $allowed = array("gif", "jpg", "jpeg", "png");
+        $ext = pathinfo($image_name, PATHINFO_EXTENSION);
+    
+        if ($image_size < 200000 && (in_array($ext, $allowed))) {
+            if(move_uploaded_file($image_tmp, $target_file)) {
+                $sql = "UPDATE user SET img='$image_name' WHERE email='$email_check'";
+                $conn->query($sql);
+                echo "<script>alert('Updated Successfully.');
+                window.location.href = 'profile.php';</script>";
+            } 
+        } elseif (!empty($name) || !empty($email)) {
+            $sql = "UPDATE user SET name='$name', email='$email' WHERE email='$email_check'";
+                $conn->query($sql);
+                echo "<script>alert('Updated Successfully.');
+                window.location.href = 'profile.php';</script>"; 
+        } else {
+            $error = "Sorry! Something went wrong.";
+        }
+    
     }
     // Close connection
     //$conn->close();
+} else {
+    header("location:index.php");
 }
 ?>
 
@@ -112,11 +124,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <?php
                                     require "config.php"; 
                                     $email_check = $_SESSION["email"];
-                                    $sql = "SELECT img FROM user WHERE email='$email_check'";
+                                    $sql = "SELECT * FROM user WHERE email='$email_check'";
                                     if ($result = $conn->query($sql)) {
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
                                                 $img = $row["img"];
+                                                $old_email = $row["email"];
+                                                $old_name = $row["name"];
                                             }                              
                                         }
                                     }
@@ -128,12 +142,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             <div class="form-group mb-3">
                                 <label class="mb-2">Name</label>
-                                <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>" placeholder="name">
+                                <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $old_name; ?>" placeholder="name">
                                 <span class="invalid-feedback"><?php echo $name_err; ?></span>
                             </div>
                             <div class="form-group mb-3">
                                 <label class="mb-2">Email</label>
-                                <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>" placeholder="name@example.com">
+                                <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $old_email; ?>" placeholder="name@example.com">
                                 <span class="invalid-feedback"><?php echo $email_err; ?></span>
                             </div>
                             <div class="form-group mb-3 d-flex justify-content-end">
@@ -145,6 +159,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="col-md-12 mt-3 <?php echo empty($error)? "d-none": "d-block"; ?>">
                 <div class="alert alert-danger"><?php echo $error ?></div>
+            </div>
+            <div class="col-md-12 mt-3 <?php echo empty($success)? "d-none": "d-block"; ?>">
+                <div class="alert alert-success"><?php echo $success ?></div>
             </div>
         </div>
     </div>

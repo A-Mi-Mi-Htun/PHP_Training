@@ -69,14 +69,12 @@ if (isset($_POST["send"])) {
                     </div>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="card-body">
-
                             <div class="form-group mb-3">
                                 <label class="mb-2">Email</label>
                                 <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>" placeholder="name@example.com">
                                 <span class="invalid-feedback"><?php echo $email_err; ?></span>
                             </div>
                         </div>
-
                         <div class="pe-3 ps-3 pt-3 bg-light d-flex justify-content-between">
                             <div class="form-group mb-3">
                                 <a href="login.php" class="text-decoration-none">Login</a>
