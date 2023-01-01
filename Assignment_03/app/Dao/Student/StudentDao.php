@@ -92,7 +92,7 @@ class StudentDao implements StudentDaoInterface
     public function search($request)
     {
         $search = $request->get('search');
-        $students = DB::select(DB::raw());
+        //$students = DB::select(DB::raw());
 
         $students = Student::join('majors', 'majors.id', 'students.major_id')
         ->where('students.name','LIKE','%'.$search.'%')
