@@ -14,14 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('email');
-            $table->bigInteger('phone');
+            $table->string('phone');
             $table->text('address');
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at');
-            $table->foreignId('major_id')->references('id')->on('majors')->onDelete('cascade');
+            $table->timestamps();
+            $table->foreignId('major_id')->constrained()->onDelete('cascade');
+
+            //$table->foreignId('major_id')->references('id')->on('majors')->onDelete('cascade');
         });
     }
 

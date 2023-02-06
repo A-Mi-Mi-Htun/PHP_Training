@@ -12,6 +12,6 @@ class Major extends Model
 
     public function students()
     {
-        $this->hasMany('App\Models\Student');
+        $this->hasMany(Student::class);
     }
 }

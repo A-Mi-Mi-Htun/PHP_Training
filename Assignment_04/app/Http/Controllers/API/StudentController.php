@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\API;
-use App\Http\Controllers\Controller;
+use App\Models\Major;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
@@ -15,7 +16,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::with('major')->get();
         return response()->json($students, 200);
     }
 
@@ -31,7 +32,7 @@ class StudentController extends Controller
 
         $validator = Validator::make($request->all(),[
             'name' => 'required|max:255',
-            'phone' => 'required|max:11',
+            'phone' => 'required',
             'email' => 'required',
             'address' => 'required',
             'major' => 'required'
@@ -45,7 +46,6 @@ class StudentController extends Controller
             $email = $request->email;
             $address = $request->address;
             $major_id = $request->major;
-    
             $students = Student::create([
                 'name' => $name,
                 'phone' => $phone,
@@ -53,7 +53,10 @@ class StudentController extends Controller
                 'address' => $address,
                 'major_id' => $major_id
             ]);
-            return response()->json(['createStudent' => $students, 'msg' => 'Data Created successfully'], 200);    
+            
+            $majorId = $major_id;
+            $majors = Major::find($majorId);
+            return response()->json(['createStudent' => $students,'major' => $majors, 'msg' => 'Data Created Successfully'], 200);
         }
     }
 
@@ -65,7 +68,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $students = Student::find($id);
+        $students = Student::with('major')->where('id', $id)->first();
         return response()->json($students, 200);
     }
 
@@ -92,7 +95,10 @@ class StudentController extends Controller
             'address' => $address,
             'major_id' => $major_id
         ]);
-        return response()->json(['msg' => 'Data Updated Successfully'], 200);
+
+        $majorId = $major_id;
+        $majors = Major::find($majorId);
+        return response()->json(['major' => $majors, 'msg' => 'Data Updated Successfully'], 200);
     }
 
     /**
